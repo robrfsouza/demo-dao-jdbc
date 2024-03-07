@@ -17,8 +17,8 @@ public class DB {
 		if (conn == null) {
 			try {
 				Properties props = loadProperties();
-				String url = props.getProperty("dburl");
-				conn = DriverManager.getConnection(url, props);
+	            String url = props.getProperty("dburl") + "?allowPublicKeyRetrieval=true";
+	            conn = DriverManager.getConnection(url, props);
 			}
 			catch (SQLException e) {
 				throw new DbException(e.getMessage());
