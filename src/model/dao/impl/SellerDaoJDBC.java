@@ -88,8 +88,28 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
 
+		String sql = "delete from seller where id =?";
+		PreparedStatement stm = null;
+		
+		try {
+			stm = conn.prepareStatement(sql);
+			stm.setInt(1, id);
+			
+			int rows = stm.executeUpdate();
+			
+			if(rows ==0) {
+				System.out.println("Id inexistente");
+			}
+			else {
+				System.out.println("delete completed");
+			}
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(stm);
+		}
 	}
 
 	@Override
